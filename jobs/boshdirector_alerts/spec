@@ -1,0 +1,81 @@
+name: boshdirector_alerts
+
+packages: []
+
+templates:
+  boshdirector.alerts.yml: boshdirector.alerts.yml
+#  prometheus_bosh_tsdb_exporter.alerts.yml: prometheus_bosh_tsdb_exporter.alerts.yml
+
+properties:
+  boshdirector_alerts.high_cpu_load.threshold:
+    description: "High CPU Load alert threshold"
+    default: 5
+  boshdirector_alerts.high_cpu_load.evaluation_time:
+    description: "High CPU Load alert evaluation time"
+    default: 10m
+  boshdirector_alerts.low_free_ram.threshold:
+    description: "Low Free RAM alert threshold"
+    default: 90
+  boshdirector_alerts.low_free_ram.evaluation_time:
+    description: "Low Free RAM alert evaluation time"
+    default: 10m
+  boshdirector_alerts.low_swap.threshold:
+    description: "Low Swap alert threshold"
+    default: 90
+  boshdirector_alerts.low_swap.evaluation_time:
+    description: "Low Swap alert evaluation time"
+    default: 10m
+  boshdirector_alerts.system_disk_full.threshold:
+    description: "System Disk Full alert threshold"
+    default: 90
+  boshdirector_alerts.job_system_disk_full.evaluation_time:
+    description: "System Disk Full alert evaluation time"
+    default: 30m
+  boshdirector_alerts.ephemeral_disk_full.threshold:
+    description: "Ephemeral Disk Full alert threshold"
+    default: 80
+  boshdirector_alerts.ephemeral_disk_full.evaluation_time:
+    description: "Ephemeral Disk Full alert evaluation time"
+    default: 30m
+  boshdirector_alerts.persistent_disk_full.threshold:
+    description: "Persistent Disk Full alert threshold"
+    default: 90
+  boshdirector_alerts.persistent_disk_full.evaluation_time:
+    description: "Persistent Disk Full alert evaluation time"
+    default: 30m
+  boshdirector_alerts.predict_system_disk_full.threshold:
+    description: "predict System Disk Full alert threshold"
+    default: 90
+  boshdirector_alerts.predict_system_disk_full.predict_time:
+    description: "predict System Disk Full alert predict time"
+    default: 14400
+  boshdirector_alerts.predict_system_disk_full.evaluation_time:
+    description: "predict System Disk Full alert evaluation time"
+    default: 30m
+  boshdirector_alerts.predict_ephemeral_disk_full.threshold:
+    description: "predict Ephemeral Disk Full alert threshold"
+    default: 80
+  boshdirector_alerts.predict_ephemeral_disk_full.predict_time:
+    description: "predict Ephemeral Disk Full alert predict time"
+    default: 14400
+  boshdirector_alerts.predict_ephemeral_disk_full.evaluation_time:
+    description: "predict Ephemeral Disk Full alert evaluation time"
+    default: 30m
+  boshdirector_alerts.predict_persistent_disk_full.threshold:
+    description: "predict Persistent Disk Full alert threshold"
+    default: 90
+  boshdirector_alerts.predict_persistent_disk_full.predict_time:
+    description: "predict Persistent Disk Full alert predict time"
+    default: 14400
+  boshdirector_alerts.predict_persistent_disk_full.evaluation_time:
+    description: "predict Persistent Disk Full alert evaluation time"
+    default: 30m
+  boshdirector_alerts.scrape_error.evaluation_time:
+    description: "Scrape error alert evaluation time"
+    default: 10m
+  boshdirector_alerts.scrape_too_old.threshold:
+    description: "Scrape too old alert threshold"
+    default: 600
+  boshdirector_alerts.scrape_too_old.evaluation_time:
+    description: "Scrape too old alert evaluation time"
+    default: 5m

@@ -1,0 +1,9 @@
+---
+name: boshdirector_dashboards
+
+templates: 
+  boshdirectors_overview.json: boshdirectors_overview.json
+
+packages: []
+
+properties: {}

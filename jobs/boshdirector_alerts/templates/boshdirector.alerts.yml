@@ -1,0 +1,32 @@
+groups:
+  - name: boshdirector-predict
+    rules:
+      - alert: BOSHDirectorSystemDiskPredictWillFill
+        expr: predict_linear(boshdirector_vitals_disk_system_percentage[1h], <%= p('boshdirector_alerts.predict_system_disk_full.predict_time') %>) > <%= p('boshdirector_alerts.job_predict_system_disk_full.threshold') %>
+        for: <%= p('boshdirector_alerts.predict_system_disk_full.evaluation_time') %>
+        labels:
+          service: boshdirector
+          severity: warning
+        annotations:
+          summary: "BOSH Director `{{$labels.environment}}/{{$labels.bosh_name}}` will run out of system disk in {{humanizeDuration <%= p('boshdirector_alerts.predict_system_disk_full.predict_time') %>}}"
+          description: "BOSH Director `{{$labels.environment}}/{{$labels.bosh_name}}` system disk will be used more than <%= p('boshdirector_alerts.predict_system_disk_full.threshold') %>% in {{humanizeDuration <%= p('boshdirector_alerts.predict_system_disk_full.predict_time') %>}}"
+
+      - alert: BOSHDirectorEphemeralDiskPredictWillFill
+        expr: predict_linear(boshdirector_vitals_disk_ephemeral_percentage[1h], <%= p('boshdirector_alerts.predict_ephemeral_disk_full.predict_time') %>) > <%= p('boshdirector_alerts.predict_ephemeral_disk_full.threshold') %>
+        for: <%= p('boshdirector_alerts.predict_ephemeral_disk_full.evaluation_time') %>
+        labels:
+          service: boshdirector
+          severity: warning
+        annotations:
+          summary: "BOSH Director `{{$labels.environment}}/{{$labels.bosh_name}}` will run out of ephemeral disk in {{humanizeDuration <%= p('boshdirector_alerts.predict_ephemeral_disk_full.predict_time') %>}}"
+          description: "BOSH Director `{{$labels.environment}}/{{$labels.bosh_name}}` ephemeral disk will be used more than <%= p('boshdirector_alerts.predict_ephemeral_disk_full.threshold') %>% in {{humanizeDuration <%= p('boshdirector_alerts.predict_ephemeral_disk_full.predict_time') %>}}"
+
+      - alert: BOSHDirectorPersistentDiskPredictWillFill
+        expr: predict_linear(boshdirector_vitals_disk_persistent_percentage[1h], <%= p('boshdirector_alerts.predict_persistent_disk_full.predict_time') %>) > <%= p('boshdirector_alerts.predict_persistent_disk_full.threshold') %>
+        for: <%= p('boshdirector_alerts.predict_persistent_disk_full.evaluation_time') %>
+        labels:
+          service: boshdirector
+          severity: warning
+        annotations:
+          summary: "BOSH Director `{{$labels.environment}}/{{$labels.bosh_name}}` will run out of persistent disk in {{humanizeDuration <%= p('boshdirector_alerts.predict_persistent_disk_full.predict_time') %>}}"
+          description: "BOSH Director `{{$labels.environment}}/{{$labels.bosh_name}}` persistent disk will be used more than <%= p('boshdirector_alerts.predict_persistent_disk_full.threshold') %>% in {{humanizeDuration <%= p('boshdirector_alerts.predict_persistent_disk_full.predict_time') %>}}"

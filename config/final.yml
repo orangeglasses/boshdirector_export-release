@@ -1,0 +1,5 @@
+name: boshdirector_exporter
+blobstore:
+  provider: s3
+  options:
+    bucket_name: bosh-director-exporter-release

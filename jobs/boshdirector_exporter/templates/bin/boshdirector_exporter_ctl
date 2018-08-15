@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+set -eu
+
+RUN_DIR=/var/vcap/sys/run/boshdirector_exporter
+LOG_DIR=/var/vcap/sys/log/boshdirector_exporter
+TMP_DIR=/var/vcap/sys/tmp/boshdirector_exporter
+STORE_DIR=/var/vcap/store/boshdirector_exporter
+mkdir -p ${RUN_DIR} ${LOG_DIR} ${TMP_DIR} ${STORE_DIR}
+
+PIDFILE=${RUN_DIR}/boshdirector_exporter.pid
+
+source /var/vcap/packages/boshdirector_exporter/bin/utils.sh
+exec 1>> ${LOG_DIR}/$(basename "$0").stdout.log
+exec 2>> ${LOG_DIR}/$(basename "$0").stderr.log
+
+export PATH=/var/vcap/packages/boshdirector_exporter/bin:${PATH}
+
+case $1 in
+  start)
+    pid_guard ${PIDFILE} "boshdirector_exporter"
+    echo $$ > ${PIDFILE}
+
+    <% if_p('env.http_proxy') do |http_proxy| %>
+    export HTTP_PROXY="<%= http_proxy %>"
+    export http_proxy="<%= http_proxy %>"
+    <% end %>
+    <% if_p('env.https_proxy') do |https_proxy| %>
+    export HTTPS_PROXY="<%= https_proxy %>"
+    export https_proxy="<%= https_proxy %>"
+    <% end %>
+    <% if_p('env.no_proxy') do |no_proxy| %>
+    export NO_PROXY="<%= no_proxy %>"
+    export no_proxy="<%= no_proxy %>"
+    <% end %>
+
+    exec boshdirector_exporter \
+      --boshdirector.agenturl="<%= p('boshdirector_exporter.agent.url') %>" \
+      <% if_p('boshdirector_exporter.agent.username') do |username| %> \
+      --boshdirector.agentusername="<%= username %>" \
+      <% end %> \
+      <% if_p('boshdirector_exporter.agent.password') do |password| %> \
+      --boshdirector.agentpassword="<%= password %>" \
+      <% end %> \
+      <% if_p('boshdirector_exporter.agent.ca_cert') do %> \
+      --boshdirector.agent-ca-file="/var/vcap/jobs/boshdirector_exporter/config/boshagent_ca_cert.pem" \
+      <% end %> \
+      <% if_p('boshdirector_exporter.metrics.namespace') do |namespace| %> \
+      --metrics.namespace="<%= namespace %>" \
+      <% end %> \
+      --metrics.environment="<%= p('boshdirector_exporter.metrics.environment') %>" \
+      <% end %> \
+      --web.listen-address=":<%= p('boshdirector_exporter.web.port') %>" \
+      <% if_p('boshdirector_exporter.web.telemetry_path') do |telemetry_path| %> \
+      --web.telemetry-path="<%= telemetry_path %>" \
+      <% end %> \
+      <% if_p('boshdirector_exporter.web.auth_username') do |auth_username| %> \
+      --web.auth.username="<%= auth_username %>" \
+      <% end %> \
+      <% if_p('boshdirector_exporter.web.auth_password') do |auth_password| %> \
+      --web.auth.password="<%= auth_password %>" \
+      <% end %> \
+      <% if_p('boshdirector_exporter.web.tls_cert', 'boshdirector_exporter.web.tls_key') do %> \
+      --web.tls.cert_file="/var/vcap/jobs/boshdirector_exporter/config/web_tls_cert.pem" \
+      --web.tls.key_file="/var/vcap/jobs/boshdirector_exporter/config/web_tls_key.pem" \
+      <% end %> \
+      >>  ${LOG_DIR}/boshdirector_exporter.stdout.log \
+      2>> ${LOG_DIR}/boshdirector_exporter.stderr.log
+    ;;
+
+  stop)
+    kill_and_wait ${PIDFILE}
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+
+esac
+exit 0

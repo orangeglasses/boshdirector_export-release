@@ -1,0 +1,43 @@
+- type: replace
+  path: /instance_groups/name=prometheus2/jobs/-
+  value:
+    name: boshdirector_exporter
+    release: boshdirector_exporter
+    properties:
+      boshdirector_exporter:
+        agent:
+          url: "((boshdirector_agent_url))"
+          username: "((boshdirector_agent_username))"
+          password: "((boshdirector_agent_password))"
+          ca_cert: "((boshdirector_agent_ca_cert))"
+        metrics:
+          environment: "((metrics_environment))"
+
+# Prometheus Alerts
+- type: replace
+  path: /instance_groups/name=prometheus2/jobs/name=boshdirector_alerts?/release
+  value: boshdirector_exporter
+
+- type: replace
+  path: /instance_groups/name=prometheus2/jobs/name=prometheus2/properties/prometheus/rule_files/-
+  value: /var/vcap/jobs/boshdirector_alerts/*.alerts.yml
+
+# Grafana Dashboards
+- type: replace
+  path: /instance_groups/name=grafana/jobs/name=boshdirector_dashboards?/release
+  value: boshdirector_exporter
+
+- type: replace
+  path: /instance_groups/name=grafana/jobs/name=grafana/properties/grafana/prometheus/dashboard_folders/name=BOSH?/files/-
+  value: /var/vcap/jobs/boshdirector_dashboards/boshdirector*.json
+
+# Prometheus Scrape Config
+- type: replace
+  path: /instance_groups/name=prometheus2/jobs/name=prometheus2/properties/prometheus/scrape_configs/-
+  value:
+    job_name: boshdirector
+    scrape_interval: 2m
+    scrape_timeout: 1m
+    static_configs:
+      - targets:
+        - localhost:9191

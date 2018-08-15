@@ -1,0 +1,5 @@
+check process boshdirector_exporter
+  with pidfile /var/vcap/sys/run/boshdirector_exporter/boshdirector_exporter.pid
+  start program "/var/vcap/jobs/boshdirector_exporter/bin/boshdirector_exporter_ctl start"
+  stop program "/var/vcap/jobs/boshdirector_exporter/bin/boshdirector_exporter_ctl stop"
+  group vcap
