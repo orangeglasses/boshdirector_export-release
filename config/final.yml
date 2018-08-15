@@ -1,4 +1,4 @@
-name: boshdirector_exporter
+name: boshdirector_exporter-release
 blobstore:
   provider: s3
   options:
