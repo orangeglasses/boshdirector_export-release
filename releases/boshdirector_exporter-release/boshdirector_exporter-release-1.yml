@@ -1,0 +1,23 @@
+name: boshdirector_exporter-release
+version: "1"
+commit_hash: a00db70
+uncommitted_changes: false
+jobs:
+- name: boshdirector_alerts
+  version: 5af00cd4e854cbc2263e19f38e8b2627c6692727
+  fingerprint: 5af00cd4e854cbc2263e19f38e8b2627c6692727
+  sha1: 2961725495191a80ad748ccd45270416aa273596
+- name: boshdirector_dashboards
+  version: 5cca0988d58f2cc06520113960898109d1ab7a18
+  fingerprint: 5cca0988d58f2cc06520113960898109d1ab7a18
+  sha1: bf501a69f78708b2d5eadbcdb13544b88ffed78f
+- name: boshdirector_exporter
+  version: 08d680bfda97d86b2d97656ca9899e4a6c87c025
+  fingerprint: 08d680bfda97d86b2d97656ca9899e4a6c87c025
+  sha1: 2be0599d80ac38a3926a1a2b17e5ec88bcf72d70
+packages:
+- name: boshdirector_exporter
+  version: 0ccf617e5b39847deb475a620cc3f79d926c865d
+  fingerprint: 0ccf617e5b39847deb475a620cc3f79d926c865d
+  sha1: ec92c74e1ca7aa5981b29ac44a364fd129924d50
+  dependencies: []
