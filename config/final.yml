@@ -3,3 +3,6 @@ blobstore:
   provider: s3
   options:
     bucket_name: bosh-director-exporter-release
+    region: eu-central-1
+    endpoint: https://s3.eu-central-1.amazonaws.com
+
