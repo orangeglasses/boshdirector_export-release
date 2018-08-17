@@ -2,7 +2,7 @@ groups:
   - name: boshdirector-predict
     rules:
       - alert: BOSHDirectorSystemDiskPredictWillFill
-        expr: predict_linear(boshdirector_vitals_disk_system_percentage[1h], <%= p('boshdirector_alerts.predict_system_disk_full.predict_time') %>) > <%= p('boshdirector_alerts.job_predict_system_disk_full.threshold') %>
+        expr: predict_linear(boshdirector_vitals_disk_system_percentage[1h], <%= p('boshdirector_alerts.predict_system_disk_full.predict_time') %>) > <%= p('boshdirector_alerts.predict_system_disk_full.threshold') %>
         for: <%= p('boshdirector_alerts.predict_system_disk_full.evaluation_time') %>
         labels:
           service: boshdirector
