@@ -49,7 +49,6 @@ case $1 in
       --metrics.namespace="<%= namespace %>" \
       <% end %> \
       --metrics.environment="<%= p('boshdirector_exporter.metrics.environment') %>" \
-      <% end %> \
       --web.listen-address=":<%= p('boshdirector_exporter.web.port') %>" \
       <% if_p('boshdirector_exporter.web.telemetry_path') do |telemetry_path| %> \
       --web.telemetry-path="<%= telemetry_path %>" \
