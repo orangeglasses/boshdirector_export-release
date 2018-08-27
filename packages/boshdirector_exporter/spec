@@ -3,4 +3,5 @@ name: boshdirector_exporter
 
 dependencies: []
 
-files: []
+files:
+  - boshdirector_exporter/boshdirector-exporter.0.0.1.linux-amd64.tar.gz

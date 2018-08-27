@@ -2,8 +2,6 @@
 
 set -eux
 
-sleep 10800
-
 # Extract bosh_exporter package
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
-tar xzvf ${BOSH_COMPILE_TARGET}/boshdirector-exporter.0.0.1.linux-amd64.tar.gz -C ${BOSH_INSTALL_TARGET}/bin
+tar xzvf boshdirector_exporter/boshdirector-exporter.0.0.1.linux-amd64.tar.gz -C ${BOSH_INSTALL_TARGET}/bin
