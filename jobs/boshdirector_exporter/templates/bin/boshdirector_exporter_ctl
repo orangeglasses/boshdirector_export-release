@@ -34,7 +34,7 @@ case $1 in
     export no_proxy="<%= no_proxy %>"
     <% end %>
 
-    exec boshdirector_exporter \
+    exec boshdirector-exporter \
       --boshdirector.agenturl="<%= p('boshdirector_exporter.agent.url') %>" \
       <% if_p('boshdirector_exporter.agent.username') do |username| %> \
       --boshdirector.agentusername="<%= username %>" \
