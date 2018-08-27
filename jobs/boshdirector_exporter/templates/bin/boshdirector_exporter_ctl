@@ -10,7 +10,7 @@ mkdir -p ${RUN_DIR} ${LOG_DIR} ${TMP_DIR} ${STORE_DIR}
 
 PIDFILE=${RUN_DIR}/boshdirector_exporter.pid
 
-source /var/vcap/packages/boshdirector_exporter/bin/utils.sh
+source /var/vcap/jobs/boshdirector_exporter/bin/utils.sh
 exec 1>> ${LOG_DIR}/$(basename "$0").stdout.log
 exec 2>> ${LOG_DIR}/$(basename "$0").stderr.log
 
