@@ -8,6 +8,7 @@ templates:
   config/boshagent_ca_cert.pem: config/boshagent_ca_cert.pem
   config/web_tls_cert.pem: config/web_tls_cert.pem
   config/web_tls_key.pem: config/web_tls_key.pem
+  bin/utils.sh: bin/utils.sh
 
 properties:
   boshdirector_exporter.agent.url:
