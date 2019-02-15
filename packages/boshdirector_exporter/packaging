@@ -4,4 +4,6 @@ set -eux
 
 # Extract bosh_exporter package
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
-tar xzvf boshdirector-exporter.0.0.1.linux-amd64.tar.gz -C ${BOSH_INSTALL_TARGET}/bin
+tar xzvf ${BOSH_COMPILE_TARGET}/boshdirector_exporter//boshdirector-exporter.0.0.1.linux-amd64.tar.gz
+cp -a ${BOSH_COMPILE_TARGET}/boshdirector-exporter ${BOSH_INSTALL_TARGET}/bin
+
